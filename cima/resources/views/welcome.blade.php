@@ -18,14 +18,26 @@
     <br>
     <div class="row">
         <div class="col-xs-12">
-            <label for="film">Films</label>
-            <select name="film" id="film" class="form-control" v-bind:disabled="disabledWhenSelected">
-                @if(isset($films))
-                    @foreach($films as $film)
-                        <option value="{{$film->film_id}}">{{$film->title}}</option>
-                    @endforeach
-                @endif
-            </select>
+            <div class="form-group">
+                <label for="film">Films</label>
+                <select name="film" class="form-control" v-bind:disabled="disabledWhenSelected" v-model="film"
+                        v-on:change="GetActors()">
+                    <option value="">Film</option>
+                    @if(isset($films))
+                        @foreach($films as $film)
+                            <option value="{{$film->film_id}}">{{$film->title}}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="actor">Actors</label>
+                <div class="alert alert-danger" v-show="!showActor"> there is no actors for this film</div>
+                <select name="" id="actor" class="form-control" v-show="showActor">
+                    <option v-for="actor in actors" value="">@{{ actor.first_name }}</option>
+
+                </select>
+            </div>
         </div>
     </div>
 </div>

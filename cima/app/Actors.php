@@ -11,4 +11,9 @@ class Actors extends Model
 
     public $timestamps = false;
 
+    public function film()
+    {
+        return $this->belongsToMany('\App\Film', 'film_actor', 'actor_id', 'film_id');
+    }
+
 }
